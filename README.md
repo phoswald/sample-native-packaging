@@ -7,12 +7,21 @@ Experiments with jlink, jpackage, and more
 
 ~~~
 $ mvn clean verify
-$ java -cp target/sample-native-packaging.jar com.github.phoswald.sample.ConsoleApplication
 
 $ export APP_FOO=BAR
-$ java -cp target/sample-native-packaging.jar \
+$ export APP_BAR=BAZ
+
+$ java \
+  -cp target/sample-native-packaging.jar \
   -Dapp.foo=BAR \
+  -Dapp.bar=BAZ \
   com.github.phoswald.sample.ConsoleApplication foo bar
+
+$ java \
+  -p target/sample-native-packaging.jar \
+  -Dapp.foo=BAR \
+  -Dapp.bar=BAZ \
+  -m com.github.phoswald.sample/com.github.phoswald.sample.ConsoleApplication foo bar
 
 $ java -cp target/sample-native-packaging.jar \
   com.github.phoswald.sample.SwingApplication
@@ -24,7 +33,7 @@ $ java \
 
 ## jlink
 
-- See [jlink](https://docs.oracle.com/en/java/javase/16/docs/specs/man/jlink.html)
+- See [jlink](https://docs.oracle.com/en/java/javase/17/docs/specs/man/jlink.html)
 
 ~~~
 $ jlink \
@@ -35,6 +44,7 @@ $ jlink \
 
 $ target/jre/bin/java \
   -Dapp.foo=BAR \
+  -Dapp.bar=BAZ \
   -m com.github.phoswald.sample/com.github.phoswald.sample.ConsoleApplication foo bar
 
 $ target/jre/bin/java \
@@ -46,7 +56,7 @@ returned by `target/jre/bin/java --list-modules`.
 
 ## jpackage
 
-- See [jpackage](https://docs.oracle.com/en/java/javase/16/docs/specs/man/jpackage.html)
+- See [jpackage](https://docs.oracle.com/en/java/javase/17/docs/specs/man/jpackage.html)
 
 ~~~
 $ jpackage \
@@ -54,7 +64,7 @@ $ jpackage \
   -p target/sample-native-packaging.jar \
   -m com.github.phoswald.sample/com.github.phoswald.sample.ConsoleApplication \
   -t app-image \
-  --java-options "-Dapp.foo=bar"
+  --java-options "-Dapp.foo=bar -Dapp.bar=BAZ"
 
 $ jpackage \
   -d target/package -n sample-swing \
@@ -68,5 +78,4 @@ $ ./target/package/sample-swing/bin/sample-swing
 
 By default (if `-t app-image` is not specified), an installable package (`*.deb` on Ubuntu) is created.
 
-If the ouput of `jlink` is used (by specifing `--runtime-image target/jre` and omitting `-p ...`), 
-the output is slightly larger because the `bin`, `include` and `man` directories are included as well.
+The ouput of `jlink` can be used by specifing `--runtime-image target/jre` and omitting `-p ...`.
