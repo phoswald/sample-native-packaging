@@ -23,7 +23,8 @@ $ java \
   -Dapp.bar=BAZ \
   -m com.github.phoswald.sample/com.github.phoswald.sample.ConsoleApplication foo bar
 
-$ java -cp target/sample-native-packaging.jar \
+$ java \
+  -cp target/sample-native-packaging.jar \
   com.github.phoswald.sample.SwingApplication
 
 $ java \
@@ -31,7 +32,27 @@ $ java \
   -m com.github.phoswald.sample/com.github.phoswald.sample.SwingApplication
 ~~~
 
+### Breaking Encapsulation
+
+Reflection requires `--add-opens`: 
+
+~~~
+$ mvn clean verify
+
+$ java \
+  -cp target/sample-native-packaging.jar \
+  --add-opens java.base/java.time=ALL-UNNAMED \
+  com.github.phoswald.sample.HackyApplication
+
+$ java \
+  -p target/sample-native-packaging.jar \
+  --add-opens java.base/java.time=com.github.phoswald.sample \
+  -m com.github.phoswald.sample/com.github.phoswald.sample.HackyApplication
+~~~
+
 ## jlink
+
+Create an optimized JRE that contains a set of modules, along with their transitive dependences.
 
 - See [jlink](https://docs.oracle.com/en/java/javase/17/docs/specs/man/jlink.html)
 
@@ -55,6 +76,9 @@ The resulting modules are stored in `target/jre/release` (along with the JRE ver
 returned by `target/jre/bin/java --list-modules`.
 
 ## jpackage
+
+Create a native executable (or installable package) that includes an optimized JRE and an application,
+along with its transitive dependences.
 
 - See [jpackage](https://docs.oracle.com/en/java/javase/17/docs/specs/man/jpackage.html)
 
