@@ -50,7 +50,7 @@ $ java \
   -m com.github.phoswald.sample/com.github.phoswald.sample.HackyApplication
 ~~~
 
-## jlink
+## jlink (manually)
 
 Create an optimized JRE that contains a set of modules, along with their transitive dependences.
 
@@ -74,6 +74,25 @@ $ target/jre/bin/java \
 
 The resulting modules are stored in `target/jre/release` (along with the JRE version) and 
 returned by `target/jre/bin/java --list-modules`.
+
+## jlink (Maven)
+
+See: https://maven.apache.org/plugins/maven-jlink-plugin/index.html
+
+~~~
+$ mvn clean verify -P jlink
+
+$ target/maven-jlink/classifiers/dist/bin/java \
+  -Dapp.foo=BAR \
+  -Dapp.bar=BAZ \
+  -m com.github.phoswald.sample/com.github.phoswald.sample.ConsoleApplication foo bar
+
+$ target/maven-jlink/classifiers/dist/bin/java \
+  -m com.github.phoswald.sample/com.github.phoswald.sample.SwingApplication
+~~~
+
+The resulting JRE is stored in `target\sample-native-packaging-*-dist.zip`
+and in `target/maven-jlink/classifiers/dist`.
 
 ## jpackage
 

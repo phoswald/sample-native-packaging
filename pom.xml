@@ -41,4 +41,33 @@
       </plugin>
     </plugins>
   </build>
+
+  <profiles>
+    <profile>
+      <id>jlink</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-jlink-plugin</artifactId>
+            <version>3.1.0</version>
+            <executions>
+              <execution>
+                <phase>package</phase>
+                <goals>
+                  <goal>jlink</goal>
+                </goals>
+                <configuration>
+                  <classifier>dist</classifier>
+                  <noHeaderFiles>true</noHeaderFiles>
+                  <noManPages>true</noManPages>
+                </configuration>
+              </execution>  
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
+
 </project>
