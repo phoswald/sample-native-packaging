@@ -12,23 +12,23 @@ $ export APP_FOO=BAR
 $ export APP_BAR=BAZ
 
 $ java \
-  -cp target/sample-native-packaging.jar \
+  -cp target/sample-native-packaging-*.jar \
   -Dapp.foo=BAR \
   -Dapp.bar=BAZ \
   com.github.phoswald.sample.ConsoleApplication foo bar
 
 $ java \
-  -p target/sample-native-packaging.jar \
+  -p target/sample-native-packaging-*.jar \
   -Dapp.foo=BAR \
   -Dapp.bar=BAZ \
   -m com.github.phoswald.sample/com.github.phoswald.sample.ConsoleApplication foo bar
 
 $ java \
-  -cp target/sample-native-packaging.jar \
+  -cp target/sample-native-packaging-*.jar \
   com.github.phoswald.sample.SwingApplication
 
 $ java \
-  -p target/sample-native-packaging.jar \
+  -p target/sample-native-packaging-*.jar \
   -m com.github.phoswald.sample/com.github.phoswald.sample.SwingApplication
 ~~~
 
@@ -40,12 +40,12 @@ Reflection requires `--add-opens`:
 $ mvn clean verify
 
 $ java \
-  -cp target/sample-native-packaging.jar \
+  -cp target/sample-native-packaging-*.jar \
   --add-opens java.base/java.time=ALL-UNNAMED \
   com.github.phoswald.sample.HackyApplication
 
 $ java \
-  -p target/sample-native-packaging.jar \
+  -p target/sample-native-packaging-*.jar \
   --add-opens java.base/java.time=com.github.phoswald.sample \
   -m com.github.phoswald.sample/com.github.phoswald.sample.HackyApplication
 ~~~
@@ -58,7 +58,7 @@ Create an optimized JRE that contains a set of modules, along with their transit
 
 ~~~
 $ jlink \
-  -p target/sample-native-packaging.jar \
+  -p target/sample-native-packaging-*.jar \
   --add-modules com.github.phoswald.sample \
   --output target/jre \
   --strip-debug --no-man-pages --no-header-files
@@ -85,14 +85,14 @@ along with its transitive dependences.
 ~~~
 $ jpackage \
   -d target/package -n sample-console \
-  -p target/sample-native-packaging.jar \
+  -p target/sample-native-packaging-*.jar \
   -m com.github.phoswald.sample/com.github.phoswald.sample.ConsoleApplication \
   -t app-image \
   --java-options "-Dapp.foo=bar -Dapp.bar=BAZ"
 
 $ jpackage \
   -d target/package -n sample-swing \
-  -p target/sample-native-packaging.jar \
+  -p target/sample-native-packaging-*.jar \
   -m com.github.phoswald.sample/com.github.phoswald.sample.SwingApplication \
   -t app-image
 
