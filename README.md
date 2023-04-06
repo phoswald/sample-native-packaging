@@ -60,7 +60,7 @@ Create an optimized JRE that contains a set of modules, along with their transit
 $ jlink \
   -p target/sample-native-packaging-*.jar \
   --add-modules com.github.phoswald.sample \
-  --output target/jre \
+  --output target/manual-jlink \
   --strip-debug --no-man-pages --no-header-files
 
 $ target/manual-jlink/bin/java \
@@ -115,8 +115,8 @@ $ jpackage \
   -m com.github.phoswald.sample/com.github.phoswald.sample.SwingApplication \
   -t app-image
 
-$ ./target/manual-jpackage/sample-console/bin/sample-console foo bar
-$ ./target/manual-jpackage/sample-swing/bin/sample-swing
+$ target/manual-jpackage/sample-console/bin/sample-console foo bar
+$ target/manual-jpackage/sample-swing/bin/sample-swing
 ~~~
 
 By default (if `-t app-image` is not specified), an installable package (`*.deb` on Ubuntu) is created.
@@ -130,5 +130,5 @@ See: https://github.com/Akman/jpackage-maven-plugin and https://akman.github.io/
 ~~~
 $ mvn clean verify -P jpackage
 
-$ ./target/maven-jpackage/sample-console/bin/sample-console foo bar
+$ target/maven-jpackage/sample-console/bin/sample-console foo bar
 ~~~
