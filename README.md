@@ -63,17 +63,17 @@ $ jlink \
   --output target/jre \
   --strip-debug --no-man-pages --no-header-files
 
-$ target/jre/bin/java \
+$ target/manual-jlink/bin/java \
   -Dapp.foo=BAR \
   -Dapp.bar=BAZ \
   -m com.github.phoswald.sample/com.github.phoswald.sample.ConsoleApplication foo bar
 
-$ target/jre/bin/java \
+$ target/manual-jlink/bin/java \
   -m com.github.phoswald.sample/com.github.phoswald.sample.SwingApplication
 ~~~
 
-The resulting modules are stored in `target/jre/release` (along with the JRE version) and 
-returned by `target/jre/bin/java --list-modules`.
+The resulting modules are stored in `target/manual-jlink/release` (along with the JRE version) and 
+returned by `target/manual-jlink/bin/java --list-modules`.
 
 ## jlink (Maven)
 
@@ -94,7 +94,7 @@ $ target/maven-jlink/classifiers/dist/bin/java \
 The resulting JRE is stored in `target\sample-native-packaging-*-dist.zip`
 and in `target/maven-jlink/classifiers/dist`.
 
-## jpackage
+## jpackage (manually)
 
 Create a native executable (or installable package) that includes an optimized JRE and an application,
 along with its transitive dependences.
@@ -103,22 +103,32 @@ along with its transitive dependences.
 
 ~~~
 $ jpackage \
-  -d target/package -n sample-console \
+  -d target/manual-jpackage -n sample-console \
   -p target/sample-native-packaging-*.jar \
   -m com.github.phoswald.sample/com.github.phoswald.sample.ConsoleApplication \
   -t app-image \
   --java-options "-Dapp.foo=bar -Dapp.bar=BAZ"
 
 $ jpackage \
-  -d target/package -n sample-swing \
+  -d target/manual-jpackage -n sample-swing \
   -p target/sample-native-packaging-*.jar \
   -m com.github.phoswald.sample/com.github.phoswald.sample.SwingApplication \
   -t app-image
 
-$ ./target/package/sample-console/bin/sample-console foo bar
-$ ./target/package/sample-swing/bin/sample-swing
+$ ./target/manual-jpackage/sample-console/bin/sample-console foo bar
+$ ./target/manual-jpackage/sample-swing/bin/sample-swing
 ~~~
 
 By default (if `-t app-image` is not specified), an installable package (`*.deb` on Ubuntu) is created.
 
-The ouput of `jlink` can be used by specifing `--runtime-image target/jre` and omitting `-p ...`.
+The ouput of `jlink` can be used by specifing `--runtime-image target/manual-jlink` and omitting `-p ...`.
+
+## jpackage (Maven)
+
+See: https://github.com/Akman/jpackage-maven-plugin and https://akman.github.io/jpackage-maven-plugin/plugin-info.html
+
+~~~
+$ mvn clean verify -P jpackage
+
+$ ./target/maven-jpackage/sample-console/bin/sample-console foo bar
+~~~

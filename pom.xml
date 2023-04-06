@@ -61,7 +61,51 @@
                   <classifier>dist</classifier>
                   <noHeaderFiles>true</noHeaderFiles>
                   <noManPages>true</noManPages>
+                  <stripDebug>true</stripDebug>
                 </configuration>
+              </execution>  
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+    <profile>
+      <id>jpackage</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>com.github.akman</groupId>
+            <artifactId>jpackage-maven-plugin</artifactId>
+            <version>0.1.5</version>
+            <executions>
+              <execution>
+                <phase>package</phase>
+                <goals>
+                  <goal>jpackage</goal>
+                </goals>
+                <configuration>
+                  <dest>target/maven-jpackage</dest>
+                  <name>sample-console</name>
+                  <type>IMAGE</type>
+                  <modulepath>
+                    <dependencysets>
+                      <dependencyset>
+                        <includeoutput>true</includeoutput>
+                      </dependencyset>
+                    </dependencysets>
+                  </modulepath>
+                  <module>com.github.phoswald.sample/com.github.phoswald.sample.ConsoleApplication</module>
+                  <javaoptions>-Dapp.foo=BAR -Dapp.bar=BAZ</javaoptions>
+                </configuration>
+                <!-- Using output of jlink, requires profile jlink -->
+                <!--<configuration>
+                  <dest>target/maven-jpackage</dest>
+                  <name>sample-console</name>
+                  <type>IMAGE</type>
+                  <runtimeimage>target/maven-jlink/classifiers/dist</runtimeimage>
+                  <module>com.github.phoswald.sample/com.github.phoswald.sample.ConsoleApplication</module>
+                  <javaoptions>-Dapp.foo=BAR -Dapp.bar=BAZ</javaoptions>
+                </configuration>-->
               </execution>  
             </executions>
           </plugin>
