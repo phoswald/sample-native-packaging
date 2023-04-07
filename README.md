@@ -3,7 +3,7 @@
 
 Experiments with jlink, jpackage, and more
 
-## Maven
+## Run Standalone
 
 ~~~
 $ mvn clean verify
@@ -50,7 +50,7 @@ $ java \
   -m com.github.phoswald.sample/com.github.phoswald.sample.HackyApplication
 ~~~
 
-## jlink (manually)
+## Run JRE created by JLink (manually)
 
 Create an optimized JRE that contains a set of modules, along with their transitive dependences.
 
@@ -75,7 +75,7 @@ $ target/manual-jlink/bin/java \
 The resulting modules are stored in `target/manual-jlink/release` (along with the JRE version) and 
 returned by `target/manual-jlink/bin/java --list-modules`.
 
-## jlink (Maven)
+## Run JRE created by JLink (Maven)
 
 See: https://maven.apache.org/plugins/maven-jlink-plugin/index.html
 
@@ -91,12 +91,12 @@ $ target/maven-jlink/classifiers/dist/bin/java \
   -m com.github.phoswald.sample/com.github.phoswald.sample.SwingApplication
 ~~~
 
-The resulting JRE is stored in `target\sample-native-packaging-*-dist.zip`
+The resulting JRE is stored in `target/sample-native-packaging-*-dist.zip`
 and in `target/maven-jlink/classifiers/dist`.
 
-## jpackage (manually)
+## Run executable and JRE created by JPackage (manually)
 
-Create a native executable (or installable package) that includes an optimized JRE and an application,
+Create a native binary executable (or installable package) that includes an optimized JRE and an application,
 along with its transitive dependences.
 
 - See [jpackage](https://docs.oracle.com/en/java/javase/17/docs/specs/man/jpackage.html)
@@ -123,7 +123,7 @@ By default (if `-t app-image` is not specified), an installable package (`*.deb`
 
 The ouput of `jlink` can be used by specifing `--runtime-image target/manual-jlink` and omitting `-p ...`.
 
-## jpackage (Maven)
+## Run executable and JRE created by JPackage (Maven)
 
 See: https://github.com/Akman/jpackage-maven-plugin and https://akman.github.io/jpackage-maven-plugin/plugin-info.html
 
