@@ -77,7 +77,7 @@ returned by `target/manual-jlink/bin/java --list-modules`.
 
 ## Run JRE created by JLink (Maven)
 
-See: https://maven.apache.org/plugins/maven-jlink-plugin/index.html
+Link: https://maven.apache.org/plugins/maven-jlink-plugin/index.html
 
 ~~~
 $ mvn clean verify -P jlink
@@ -125,7 +125,10 @@ The ouput of `jlink` can be used by specifing `--runtime-image target/manual-jli
 
 ## Run executable and JRE created by JPackage (Maven)
 
-See: https://github.com/Akman/jpackage-maven-plugin and https://akman.github.io/jpackage-maven-plugin/plugin-info.html
+Links:
+
+- https://github.com/Akman/jpackage-maven-plugin
+- https://akman.github.io/jpackage-maven-plugin/plugin-info.html
 
 ~~~
 $ mvn clean verify -P jpackage
