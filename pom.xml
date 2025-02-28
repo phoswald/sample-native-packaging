@@ -10,7 +10,7 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <maven.compiler.release>17</maven.compiler.release>
+    <maven.compiler.release>21</maven.compiler.release>
   </properties>
 
   <dependencies>
@@ -108,6 +108,14 @@
                 </configuration>-->
               </execution>  
             </executions>
+            <dependencies>
+              <!-- required by jpackage-maven-plugin v0.1.5 for Java 21 -->
+              <dependency>
+                <groupId>org.ow2.asm</groupId>
+                <artifactId>asm</artifactId>
+                <version>9.7.1</version>
+              </dependency>
+            </dependencies>
           </plugin>
         </plugins>
       </build>
