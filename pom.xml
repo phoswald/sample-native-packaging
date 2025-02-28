@@ -79,6 +79,7 @@
             <version>0.1.5</version>
             <executions>
               <execution>
+                <id>package-console</id>
                 <phase>package</phase>
                 <goals>
                   <goal>jpackage</goal>
@@ -106,6 +107,26 @@
                   <module>com.github.phoswald.sample/com.github.phoswald.sample.ConsoleApplication</module>
                   <javaoptions>-Dapp.foo=BAR -Dapp.bar=BAZ</javaoptions>
                 </configuration>-->
+              </execution>  
+              <execution>
+                <id>package-swing</id>
+                <phase>package</phase>
+                <goals>
+                  <goal>jpackage</goal>
+                </goals>
+                <configuration>
+                  <dest>target/maven-jpackage</dest>
+                  <name>sample-swing</name>
+                  <type>IMAGE</type>
+                  <modulepath>
+                    <dependencysets>
+                      <dependencyset>
+                        <includeoutput>true</includeoutput>
+                      </dependencyset>
+                    </dependencysets>
+                  </modulepath>
+                  <module>com.github.phoswald.sample/com.github.phoswald.sample.SwingApplication</module>
+                </configuration>
               </execution>  
             </executions>
             <dependencies>

@@ -134,4 +134,5 @@ Links:
 $ mvn clean verify -P jpackage
 
 $ target/maven-jpackage/sample-console/bin/sample-console foo bar
+$ target/maven-jpackage/sample-swing/bin/sample-swing
 ~~~
