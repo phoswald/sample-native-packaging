@@ -10,7 +10,7 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <maven.compiler.release>21</maven.compiler.release>
+    <maven.compiler.release>27</maven.compiler.release>
   </properties>
 
   <dependencies>
@@ -98,16 +98,23 @@
                   <module>com.github.phoswald.sample/com.github.phoswald.sample.ConsoleApplication</module>
                   <javaoptions>-Dapp.foo=BAR -Dapp.bar=BAZ</javaoptions>
                 </configuration>
-                <!-- Using output of jlink, requires profile jlink -->
-                <!--<configuration>
+              </execution>
+              <!-- Using output of jlink, requires profile jlink -->
+              <!--<execution>
+                <id>package-console-2</id>
+                <phase>package</phase>
+                <goals>
+                  <goal>jpackage</goal>
+                </goals>
+                <configuration>
                   <dest>target/maven-jpackage</dest>
-                  <name>sample-console</name>
+                  <name>sample-console-2</name>
                   <type>IMAGE</type>
                   <runtimeimage>target/maven-jlink/classifiers/dist</runtimeimage>
                   <module>com.github.phoswald.sample/com.github.phoswald.sample.ConsoleApplication</module>
                   <javaoptions>-Dapp.foo=BAR -Dapp.bar=BAZ</javaoptions>
-                </configuration>-->
-              </execution>  
+                </configuration>
+              </execution>-->
               <execution>
                 <id>package-swing</id>
                 <phase>package</phase>
